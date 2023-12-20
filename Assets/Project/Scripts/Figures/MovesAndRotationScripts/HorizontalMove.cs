@@ -1,8 +1,12 @@
 using UnityEngine;
-public partial class FigureScript : MonoBehaviour
+public partial class GeneratorScript : MonoBehaviour
 {
     void HorizontalMove(string direction)
     {
+        if (_currentFigure == null)
+        {
+            return;
+        }
         Transform currentTransform = _currentFigure.transform;
         int childCount = currentTransform.childCount;
         bool isMovePossible = true;
@@ -34,9 +38,9 @@ public partial class FigureScript : MonoBehaviour
         return direction switch
         {
             "forward" => new(
-                                currentStep.x + 1f,
-                                currentStep.y,
-                                currentStep.z
+                            currentStep.x + 1f,
+                            currentStep.y,
+                            currentStep.z
                             ),
             "back" => new(
                             currentStep.x - 1f,

@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class FigureScript : MonoBehaviour
+public partial class GeneratorScript : MonoBehaviour
 {
 
 
     // Задаем размеры поля
-    private float _minZ = -10;
-    private float _maxZ = 0;
-    private float _minY = -19;
-    private float _minX = -0.25f;
-    private float _maxX = 1.25f;
+    private readonly float _minZ = -10;
+    private readonly float _maxZ = 0;
+    private readonly float _minY = -19;
+    private readonly float _minX = -0.25f;
+    private readonly float _maxX = 1.25f;
 
     // Задаем фигуры
     public List<GameObject> figures;
@@ -59,6 +59,23 @@ public partial class FigureScript : MonoBehaviour
         {
             HorizontalMove("left");
         }
+    }
+
+    void GameOver()
+    {
+        Destroy(_currentFigure);
+        Destroy(_nextFigure);
+        int count = transform.childCount;
+        for (int childOfField = 0; childOfField < count; childOfField++)
+        {
+            var childToDel = transform.GetChild(childOfField).gameObject;
+            var childToDelName = childToDel.name;
+            if (childToDelName.Contains("Clone"))
+            {
+                Destroy(childToDel);
+            }
+        }
+        return;
     }
 
 

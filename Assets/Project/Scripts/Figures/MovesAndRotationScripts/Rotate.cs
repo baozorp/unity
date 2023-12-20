@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-public partial class FigureScript : MonoBehaviour
+public partial class GeneratorScript : MonoBehaviour
 {
     void RotateByZ()
     {

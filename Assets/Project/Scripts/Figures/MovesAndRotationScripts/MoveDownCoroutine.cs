@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-public partial class FigureScript : MonoBehaviour
+public partial class GeneratorScript : MonoBehaviour
 {
     IEnumerator MoveDownCoroutine()
     {
@@ -76,9 +76,9 @@ public partial class FigureScript : MonoBehaviour
         {
             Destroy(_nextFigure);
         }
-        int current_number = (this._nextFigureNumber == -1) ? UnityEngine.Random.Range(0, figures.Count - 1) : this._nextFigureNumber;
-        int _nextFigureNumber = UnityEngine.Random.Range(0, figures.Count - 1);
-        GameObject chosenFigure = figures[current_number];
+        int currentNumber = (this._nextFigureNumber == -1) ? Random.Range(0, figures.Count - 1) : this._nextFigureNumber;
+        int _nextFigureNumber = Random.Range(0, figures.Count - 1);
+        GameObject chosenFigure = figures[currentNumber];
         GameObject nextChangedFigure = figures[_nextFigureNumber];
         _currentFigure = Instantiate(
             chosenFigure,
@@ -86,6 +86,22 @@ public partial class FigureScript : MonoBehaviour
             chosenFigure.transform.rotation,
             chosenFigure.transform.parent
         );
+        _nextFigure = Instantiate(
+            nextChangedFigure,
+            nextField.transform.position,
+            nextChangedFigure.transform.rotation,
+            nextChangedFigure.transform.parent);
+        _currentFigure.SetActive(true);
+        _nextFigure.SetActive(true);
+        if (TestGenerateHasCollision())
+        {
+            GameOver();
+        };
+
+    }
+
+    bool TestGenerateHasCollision()
+    {
         int childCount = _currentFigure.transform.childCount;
         for (int i = 0; i < childCount; i++)
         {
@@ -95,27 +111,9 @@ public partial class FigureScript : MonoBehaviour
             if (
                 positionsDict.ContainsKey(currentStep.ToString()))
             {
-                Destroy(_currentFigure);
-                Destroy(_nextFigure);
-                int count = transform.parent.childCount;
-                for (int childOfField = 0; childOfField < count; childOfField++)
-                {
-                    var childToDel = transform.parent.GetChild(childOfField).gameObject;
-                    var childToDelName = childToDel.name;
-                    if (childToDelName.Contains("Clone"))
-                    {
-                        Destroy(childToDel);
-                    }
-                }
-                return;
+                return true;
             }
         }
-        _nextFigure = Instantiate(
-            nextChangedFigure,
-            nextField.transform.position,
-            nextChangedFigure.transform.rotation,
-            nextChangedFigure.transform.parent);
-        _currentFigure.SetActive(true);
-        _nextFigure.SetActive(true);
+        return false;
     }
 }

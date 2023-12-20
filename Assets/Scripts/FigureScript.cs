@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using System.Threading;
 using UnityEngine;
 
 public class FigureScript : MonoBehaviour
@@ -20,22 +21,17 @@ public class FigureScript : MonoBehaviour
 
     public Transform next_field;
     public Transform hold_field;
+    private System.Random random = new System.Random();
 
     void Start()
     {
-        // Устаналиваем координаты объектов в нулевую точку генератора
-        for (int i = 0; i < figures.Count; i++)
-        {
-            GameObject figure = figures[i];
-            figure.transform.position = new Vector3(
-                transform.position.x,
-                transform.position.y,
-                transform.position.z
-            );
-            Debug.Log(transform.position);
-        }
-        var current_number = new System.Random().Next(0, figures.Count);
-        var next_number = new System.Random().Next(0, figures.Count);
+        // while (figures.Count == 0)
+        // {
+        //     Thread.Sleep(100);
+        // }
+        Debug.Log("List counts" + figures.Count);
+        int current_number = random.Next(0, figures.Count);
+        int next_number = random.Next(0, figures.Count);
         GameObject chosen_figure = figures[current_number];
         GameObject next_changed_figure = figures[next_number];
         _currentFigure = Instantiate(

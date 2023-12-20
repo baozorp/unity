@@ -6,12 +6,11 @@ public partial class FigureScript : MonoBehaviour
 
 
     // Задаем размеры поля
-    private float _minZ = -5;
-    private float _maxZ = 4;
+    private float _minZ = -10;
+    private float _maxZ = 0;
     private float _minY = -19;
-    private float _minX = 0;
-    private float _maxX = 1;
-    private float iters = 0;
+    private float _minX = -0.25f;
+    private float _maxX = 1.25f;
 
     // Задаем фигуры
     public List<GameObject> figures;
@@ -46,7 +45,19 @@ public partial class FigureScript : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            RotateByZ();
+            HorizontalMove("forward");
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            HorizontalMove("back");
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            HorizontalMove("right");
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            HorizontalMove("left");
         }
     }
 

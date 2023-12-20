@@ -6,12 +6,13 @@ public partial class FigureScript : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.5f);
-
-
+            yield return new WaitForSeconds(0.1f);
+            if (_currentFigure == null)
+            {
+                break;
+            }
             Transform currentTransform = _currentFigure.transform;
             int childCount = currentTransform.childCount;
-            iters++;
             bool isBottom = false;
             for (int i = 0; i < childCount; i++)
             {
@@ -85,6 +86,30 @@ public partial class FigureScript : MonoBehaviour
             chosenFigure.transform.rotation,
             chosenFigure.transform.parent
         );
+        int childCount = _currentFigure.transform.childCount;
+        for (int i = 0; i < childCount; i++)
+        {
+            Transform child = _currentFigure.transform.GetChild(i);
+            // Получаем позицию на поле
+            Vector3 currentStep = transform.parent.InverseTransformPoint(child.position);
+            if (
+                positionsDict.ContainsKey(currentStep.ToString()))
+            {
+                Destroy(_currentFigure);
+                Destroy(_nextFigure);
+                int count = transform.parent.childCount;
+                for (int childOfField = 0; childOfField < count; childOfField++)
+                {
+                    var childToDel = transform.parent.GetChild(childOfField).gameObject;
+                    var childToDelName = childToDel.name;
+                    if (childToDelName.Contains("Clone"))
+                    {
+                        Destroy(childToDel);
+                    }
+                }
+                return;
+            }
+        }
         _nextFigure = Instantiate(
             nextChangedFigure,
             nextField.transform.position,

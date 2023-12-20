@@ -6,17 +6,19 @@ public partial class FigureScript : MonoBehaviour
 
 
     // Задаем размеры поля
-    // private int _minZ = -10;
-    // private int _minY = -20;
-    // private int _maxX = 1;
-    private int iters = 0;
+    private float _minZ = -5;
+    private float _maxZ = 4;
+    private float _minY = -19;
+    private float _minX = 0;
+    private float _maxX = 1;
+    private float iters = 0;
 
     // Задаем фигуры
-    public GameObject[] figures = new GameObject[7];
+    public List<GameObject> figures;
 
     private GameObject _currentFigure;
     private GameObject _nextFigure;
-    private int nextFigureNumber = -1;
+    private int _nextFigureNumber = -1;
 
     public Transform nextField;
     public Transform holdField;
@@ -25,7 +27,7 @@ public partial class FigureScript : MonoBehaviour
 
     void Start()
     {
-        int countOfFigures = figures.Length;
+        int countOfFigures = figures.Count;
         if (countOfFigures == 0)
         {
             Debug.Log("List of figures is empty!");
@@ -38,6 +40,14 @@ public partial class FigureScript : MonoBehaviour
     }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            RotateByZ();
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            RotateByZ();
+        }
     }
 
 

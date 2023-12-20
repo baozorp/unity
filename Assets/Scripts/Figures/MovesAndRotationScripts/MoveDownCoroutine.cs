@@ -7,36 +7,41 @@ public partial class FigureScript : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(0.5f);
+
+
             Transform currentTransform = _currentFigure.transform;
             int childCount = currentTransform.childCount;
             iters++;
             bool isBottom = false;
             for (int i = 0; i < childCount; i++)
             {
+                //Получаем дочерний объект
                 Transform child = currentTransform.GetChild(i);
+
+                // Получаем позицию на поле
+                Vector3 currentStep = transform.parent.InverseTransformPoint(child.position);
+                // Рассчитываем следующий шаг
                 Vector3 nextStep = new(
-                    child.transform.localPosition.x,
-                    child.transform.localPosition.y - 1f,
-                    child.transform.localPosition.z
+                    currentStep.x,
+                    currentStep.y - 1f,
+                    currentStep.z
                 );
-                Vector3 postionOnTetris = currentTransform.localPosition + nextStep;
-                string keyPosition = postionOnTetris.ToString();
+                // Получаем ключ для словаря позиций
+                string keyForElement = nextStep.ToString();
+
                 if (
-                    positionsDict.ContainsKey(keyPosition) ||
-                    (currentTransform.localPosition.y + child.localPosition.y - 1f) < 0f
+                    positionsDict.ContainsKey(keyForElement) ||
+                    currentStep.y < _minY
                 )
                 {
                     isBottom = true;
+                    BottomActions(currentTransform, childCount);
                     break;
                 }
             }
-            if (isBottom)
+            if (!isBottom)
             {
-                BottomActions(currentTransform, childCount);
-            }
-            else
-            {
-                currentTransform.localPosition = new Vector3(
+                currentTransform.localPosition = new(
                     currentTransform.localPosition.x,
                     currentTransform.localPosition.y - 1f,
                     currentTransform.localPosition.z);
@@ -50,15 +55,14 @@ public partial class FigureScript : MonoBehaviour
         for (int i = 0; i < childCount; i++)
         {
             GameObject child = currentTransform.GetChild(i).gameObject;
+            Vector3 currentStep = transform.parent.InverseTransformPoint(child.transform.position);
             GameObject childsCopy = Instantiate(
                 child,
                 child.transform.position,
                 child.transform.rotation,
                 transform
             );
-            Vector3 postionOnTetris = currentTransform.localPosition + child.transform.localPosition;
-            Debug.Log("Iterations: " + iters + " \nobject is " + childsCopy);
-            positionsDict[postionOnTetris.ToString()] = childsCopy;
+            positionsDict[currentStep.ToString()] = childsCopy;
         }
         Destroy(currentTransform.gameObject);
         ChoseNewFigures();
@@ -71,10 +75,10 @@ public partial class FigureScript : MonoBehaviour
         {
             Destroy(_nextFigure);
         }
-        int current_number = (nextFigureNumber == -1) ? UnityEngine.Random.Range(0, figures.Length - 1) : nextFigureNumber;
-        int next_number = UnityEngine.Random.Range(0, figures.Length - 1);
+        int current_number = (this._nextFigureNumber == -1) ? UnityEngine.Random.Range(0, figures.Count - 1) : this._nextFigureNumber;
+        int _nextFigureNumber = UnityEngine.Random.Range(0, figures.Count - 1);
         GameObject chosenFigure = figures[current_number];
-        GameObject nextChangedFigure = figures[next_number];
+        GameObject nextChangedFigure = figures[_nextFigureNumber];
         _currentFigure = Instantiate(
             chosenFigure,
             chosenFigure.transform.position,

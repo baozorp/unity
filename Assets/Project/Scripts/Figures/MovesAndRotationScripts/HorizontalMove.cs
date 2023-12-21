@@ -1,5 +1,5 @@
 using UnityEngine;
-public partial class GeneratorScript : MonoBehaviour
+public partial class FigureScript : MonoBehaviour
 {
     void HorizontalMove(string direction)
     {

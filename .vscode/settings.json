@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "alya_for_unity-master.sln"
+    "dotnet.defaultSolution": "unity-master.sln"
 }

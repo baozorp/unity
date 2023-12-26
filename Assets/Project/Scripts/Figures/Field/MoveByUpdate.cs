@@ -1,5 +1,5 @@
 using UnityEngine;
-public partial class FigureScript : MonoBehaviour
+public partial class Generator : MonoBehaviour
 {
     private float _cameraLastPosition = -1;
     void ProcessingByCameraPosistion()
@@ -31,25 +31,25 @@ public partial class FigureScript : MonoBehaviour
     void HandleInputForPositiveX()
     {
         if (Input.GetKeyDown(KeyCode.W))
-            HorizontalMove("back");
+            _currentFigure.HorizontalMove(Vector3.left, positionsDict, _minX, _maxX, _minZ, _maxZ);
         else if (Input.GetKeyDown(KeyCode.S))
-            HorizontalMove("forward");
+            _currentFigure.HorizontalMove(Vector3.right, positionsDict, _minX, _maxX, _minZ, _maxZ);
         else if (Input.GetKeyDown(KeyCode.D))
-            HorizontalMove("left");
+            _currentFigure.HorizontalMove(Vector3.forward, positionsDict, _minX, _maxX, _minZ, _maxZ);
         else if (Input.GetKeyDown(KeyCode.A))
-            HorizontalMove("right");
+            _currentFigure.HorizontalMove(Vector3.back, positionsDict, _minX, _maxX, _minZ, _maxZ);
     }
 
     void HandleInputForNegativeX()
     {
         if (Input.GetKeyDown(KeyCode.W))
-            HorizontalMove("forward");
+            _currentFigure.HorizontalMove(Vector3.right, positionsDict, _minX, _maxX, _minZ, _maxZ);
         else if (Input.GetKeyDown(KeyCode.S))
-            HorizontalMove("back");
+            _currentFigure.HorizontalMove(Vector3.left, positionsDict, _minX, _maxX, _minZ, _maxZ);
         else if (Input.GetKeyDown(KeyCode.D))
-            HorizontalMove("right");
+            _currentFigure.HorizontalMove(Vector3.back, positionsDict, _minX, _maxX, _minZ, _maxZ);
         else if (Input.GetKeyDown(KeyCode.A))
-            HorizontalMove("left");
+            _currentFigure.HorizontalMove(Vector3.forward, positionsDict, _minX, _maxX, _minZ, _maxZ);
     }
 
     void RotateFields()

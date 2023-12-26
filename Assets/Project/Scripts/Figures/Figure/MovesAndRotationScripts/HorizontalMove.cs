@@ -1,21 +1,22 @@
+using System.Collections.Generic;
 using UnityEngine;
-public partial class FigureScript : MonoBehaviour
+public partial class Figure : MonoBehaviour
 {
-    void HorizontalMove(string direction)
+    public void HorizontalMove(Vector3 vector,
+                                Dictionary<string, GameObject> positionsDict,
+                                float _minX,
+                                float _maxX,
+                                float _minZ,
+                                float _maxZ)
     {
-        if (_currentFigure == null)
-        {
-            return;
-        }
-        Transform currentTransform = _currentFigure.transform;
-        int childCount = currentTransform.childCount;
+        int childCount = transform.childCount;
         bool isMovePossible = true;
         for (int i = 0; i < childCount; i++)
         {
-            Transform child = _currentFigure.transform.GetChild(i);
+            Transform child = transform.GetChild(i);
             // Получаем позицию на поле
             Vector3 currentStep = transform.parent.InverseTransformPoint(child.position);
-            Vector3 nextStep = SwitchDirection(direction, currentStep);
+            Vector3 nextStep = currentStep + vector;
             if (
                 positionsDict.ContainsKey(nextStep.ToString()) ||
                 nextStep.x < _minX ||
@@ -29,7 +30,7 @@ public partial class FigureScript : MonoBehaviour
         }
         if (isMovePossible)
         {
-            _currentFigure.transform.localPosition = SwitchDirection(direction, _currentFigure.transform.localPosition);
+            transform.localPosition = transform.localPosition + vector;
         }
     }
 

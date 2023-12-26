@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using System.Collections;
-public partial class Generator : MonoBehaviour
-{
 
+public partial class Tetris : MonoBehaviour
+{
 
     // Задаем размеры поля
     private readonly float _minZ = -5;

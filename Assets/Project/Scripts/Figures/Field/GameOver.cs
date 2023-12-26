@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 
-public partial class Generator : MonoBehaviour
+public partial class Tetris : MonoBehaviour
 {
     IEnumerator GameOver()
     {

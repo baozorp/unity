@@ -36,13 +36,13 @@ class FiguresGenerator : MonoBehaviour
             nextField.position,
             parent.rotation,
             parent);
-        currentGameObject.SetActive(true);
-        nextGameObject.SetActive(true);
         var currentFigure = currentGameObject.GetComponent<Figure>();
         var nextFigure = nextGameObject.GetComponent<Figure>();
 
         return (currentFigure, nextFigure);
     }
+
+
 
     public Figure GenerateFigure(GameObject parent, Transform nextField)
     {

@@ -1,16 +1,16 @@
 using UnityEngine;
-public partial class Generator : MonoBehaviour
+public partial class Tetris : MonoBehaviour
 {
     private float _cameraLastPosition = -1;
     void ProcessingByCameraPosistion()
     {
         float cameraX = Camera.main.transform.position.x;
-
+        Vector3 vector;
 
         switch (cameraX > 0)
         {
             case true:
-                HandleInputForPositiveX();
+                vector = InputManager.HandleInputForPositiveX();
                 if (_cameraLastPosition <= 0)
                 {
                     RotateFields();
@@ -18,38 +18,15 @@ public partial class Generator : MonoBehaviour
                 break;
 
             case false:
-                HandleInputForNegativeX();
+                vector = -InputManager.HandleInputForPositiveX();
                 if (_cameraLastPosition >= 0)
                 {
                     RotateFields();
                 }
                 break;
         }
+        _currentFigure.HorizontalMove(vector, positionsDict, _minX, _maxX, _minZ, _maxZ);
         _cameraLastPosition = Camera.main.transform.position.x;
-    }
-
-    void HandleInputForPositiveX()
-    {
-        if (Input.GetKeyDown(KeyCode.W))
-            _currentFigure.HorizontalMove(Vector3.left, positionsDict, _minX, _maxX, _minZ, _maxZ);
-        else if (Input.GetKeyDown(KeyCode.S))
-            _currentFigure.HorizontalMove(Vector3.right, positionsDict, _minX, _maxX, _minZ, _maxZ);
-        else if (Input.GetKeyDown(KeyCode.D))
-            _currentFigure.HorizontalMove(Vector3.forward, positionsDict, _minX, _maxX, _minZ, _maxZ);
-        else if (Input.GetKeyDown(KeyCode.A))
-            _currentFigure.HorizontalMove(Vector3.back, positionsDict, _minX, _maxX, _minZ, _maxZ);
-    }
-
-    void HandleInputForNegativeX()
-    {
-        if (Input.GetKeyDown(KeyCode.W))
-            _currentFigure.HorizontalMove(Vector3.right, positionsDict, _minX, _maxX, _minZ, _maxZ);
-        else if (Input.GetKeyDown(KeyCode.S))
-            _currentFigure.HorizontalMove(Vector3.left, positionsDict, _minX, _maxX, _minZ, _maxZ);
-        else if (Input.GetKeyDown(KeyCode.D))
-            _currentFigure.HorizontalMove(Vector3.back, positionsDict, _minX, _maxX, _minZ, _maxZ);
-        else if (Input.GetKeyDown(KeyCode.A))
-            _currentFigure.HorizontalMove(Vector3.forward, positionsDict, _minX, _maxX, _minZ, _maxZ);
     }
 
     void RotateFields()

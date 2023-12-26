@@ -1,5 +1,5 @@
 using UnityEngine;
-public partial class Generator : MonoBehaviour
+public partial class Tetris : MonoBehaviour
 {
     void Hold()
     {

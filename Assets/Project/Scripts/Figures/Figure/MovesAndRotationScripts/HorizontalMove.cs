@@ -33,32 +33,4 @@ public partial class Figure : MonoBehaviour
             transform.localPosition = transform.localPosition + vector;
         }
     }
-
-    private Vector3 SwitchDirection(string direction, Vector3 currentStep)
-    {
-        return direction switch
-        {
-            "forward" => new(
-                            currentStep.x + 1f,
-                            currentStep.y,
-                            currentStep.z
-                            ),
-            "back" => new(
-                            currentStep.x - 1f,
-                            currentStep.y,
-                            currentStep.z
-                            ),
-            "left" => new(
-                            currentStep.x,
-                            currentStep.y,
-                            currentStep.z + 1f
-                            ),
-            "right" => new(
-                            currentStep.x,
-                            currentStep.y,
-                            currentStep.z - 1f
-                            ),
-            _ => Vector3.zero,
-        };
-    }
 }

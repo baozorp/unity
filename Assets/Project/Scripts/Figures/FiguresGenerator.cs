@@ -7,8 +7,6 @@ class FiguresGenerator : MonoBehaviour
     private FiguresGenerator() { }
     int _nextFigureNumber = -1;
     int _holdNumber = -1;
-    // public GameObject _nextFigure { get; private set; }
-    // public GameObject _currentFigure { get; private set; }
 
     public List<GameObject> figures;
     public (Figure, Figure) ChoseNewFigures(Transform parent, Transform nextField)

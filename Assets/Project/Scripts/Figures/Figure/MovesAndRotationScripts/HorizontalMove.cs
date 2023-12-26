@@ -33,4 +33,5 @@ public partial class Figure : MonoBehaviour
             transform.localPosition = transform.localPosition + vector;
         }
     }
+
 }

@@ -54,7 +54,10 @@ public partial class Tetris : MonoBehaviour
         ProcessingByCameraPosistion();
     }
 
-
+    void Pause()
+    {
+        _isPause = !_isPause;
+    }
     bool TestGenerateHasCollision()
     {
         int childCount = _currentFigure.transform.gameObject.transform.childCount;

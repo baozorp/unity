@@ -3875,7 +3875,7 @@ Transform:
   m_GameObject: {fileID: 2027179081}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: -5}
+  m_LocalPosition: {x: 0, y: -1, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3893,15 +3893,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 882e593794a014b6283ff6b9f956f741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pause_button: {fileID: 0}
-  figures:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   scoreField: {fileID: 1154539966}
   nextField: {fileID: 1672323942}
   holdField: {fileID: 784360557}
@@ -4193,7 +4184,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2071390758}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.014814695, y: 0.70513594, z: 0.014738859, w: 0.7087642}
+  m_LocalRotation: {x: -0.014814694, y: 0.70513594, z: 0.014738858, w: 0.70876414}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
